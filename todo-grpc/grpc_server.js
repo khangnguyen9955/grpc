@@ -43,23 +43,23 @@ function createTodo(call, callback) {
   callback(null, todoItem);
 }
 
-// function readTodosStream(call, callback) {
-//   console.log("readTodosStream");
-//   todos.forEach((t) => call.write(t));
-// // call.end();
-// }
-function readTodosStream(call) {
+function readTodosStream(call, callback) {
   console.log("readTodosStream");
-
-  let i = 0;
-  const intervalId = setInterval(() => {
-    call.write(todos[i]);
-    i++;
-    if (i == todos.length) {
-      clearInterval(intervalId);
-    }
-  }, 100);
+  todos.forEach((t) => call.write(t));
+call.end();
 }
+// function readTodosStream(call) {
+//   console.log("readTodosStream");
+
+//   let i = 0;
+//   const intervalId = setInterval(() => {
+//     call.write(todos[i]);
+//     i++;
+//     if (i == todos.length) {
+//       clearInterval(intervalId);
+//     }
+//   }, 100);
+// }
 
 function readTodos(call, callback) {
   callback(null, { items: todos });
